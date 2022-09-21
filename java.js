@@ -1,8 +1,5 @@
-/*const compchoice = getComputerChoice();
-const playchoice = getPlayerChoice();*/
-let playerwins = 0
-let computerwins = 0
-
+let playerwins = 0;
+let computerwins = 0;
 function getComputerChoice() {
     let choicenum = Math.floor(Math.random() * 3) + 1;
     console.log(choicenum);
@@ -17,18 +14,18 @@ function getComputerChoice() {
     }
 return x
 }
+document.getElementById("rock").addEventListener("click", 
+    function() { playRound("rock"); });
+document.getElementById("paper").addEventListener("click", 
+    function() { playRound("paper"); });
+document.getElementById("scissors").addEventListener("click", 
+    function() { playRound("scissors"); });
 
-function getPlayerChoice() {
-    let playchoice = prompt("Well, will it be rock, paper, or scissors?", "").toLowerCase();
-return playchoice
-}
-
-function playRound() {
-    let playchoice = getPlayerChoice();
+function playRound(x) {
+    let playchoice = x;
     let compchoice = getComputerChoice();
     if (playchoice === compchoice) {
         result = "Tie!"
-        computerwins++, playerwins++
     } else if (playchoice === "rock" && compchoice === "paper") {
         result = "Paper beats Rock, sorry for your loss!"
         computerwins++
@@ -47,27 +44,32 @@ function playRound() {
     } else if (playchoice === "scissors" && compchoice === "paper") {
         result = "Scissors beat Paper, good win!"
         playerwins++
-    } else {
+     } else {
         result = "You must have picked something other than rock, paper, or scissors"
     }
+    
     console.log(result);
-return result  
+    document.getElementById("top").textContent = playerwins + ' to ' + computerwins;
+    document.getElementById("results").textContent = result;
+    winner();
 }
 
-function game() {
-    for (let i = 0; i < 10; i++) {
-    playRound();
-    if (playerwins == 5) {
-        return "winner"
-    } else if (computerwins == 5) {
-        return "loser"
-    }
+function winner() {
+    if (playerwins == 5 || computerwins == 5) {
+        if (computerwins > playerwins) {
+            document.getElementById("results").textContent = "Epic Loss";
+        } else {
+            document.getElementById("results").textContent = "Big Winner";
+        }
+        document.getElementById("rock").disabled = true;
+        document.getElementById("paper").disabled = true;
+        document.getElementById("scissors").disabled = true; 
     }
 }
 /*console.log(compchoice);
 console.log(playchoice);*/
 /*console.log(playRound());
 console.log(playRound());*/
-console.log(game());
-console.log(playerwins);
-console.log(computerwins);
+//console.log(game());
+//console.log(playerwins);
+//console.log(computerwins);
